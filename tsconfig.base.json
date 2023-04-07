@@ -1,0 +1,34 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@crud-nx-app/domain": ["libs/domain/src/index.ts"],
+      "@crud-nx-app/product-management/domian": [
+        "libs/product-management/domian/src/index.ts"
+      ],
+      "@crud-nx-app/product-management/feature-product": [
+        "libs/product-management/feature-product/src/index.ts"
+      ],
+      "@crud-nx-app/product-management/product-feature": [
+        "libs/product-management/product-feature/src/index.ts"
+      ],
+      "@crud-nx-app/product-management/product-features": [
+        "libs/product-management/product-features/src/index.ts"
+      ]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
