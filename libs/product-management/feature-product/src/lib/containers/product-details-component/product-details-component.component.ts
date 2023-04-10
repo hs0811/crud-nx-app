@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ProductFacadeService } from '../../../../../domian/src/lib/application/product.facade.service'
 import { Product } from 'libs/product-management/domian/src/lib/entities/product';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'product-details-component',
@@ -11,61 +13,26 @@ import { Product } from 'libs/product-management/domian/src/lib/entities/product
 
 export class ProductDetailsComponent implements OnInit {
   getloadproduct$ = this.productFacade.products$;
-  productName = '';
-  productDescription = '';
-  quantity = 0;
-  status = 'In Stock';
-  editMode = false;
-  productId: number | null = null;
+  myForm: FormGroup;
+  product: Product = {} as Product;
 
-  constructor(private productFacade: ProductFacadeService) {}
-
-  ngOnInit() {
+  constructor(private formBuilder: FormBuilder, private productFacade: ProductFacadeService, private router: Router)
+ { this.myForm = formBuilder.group({ ProductName: '', ProductDescription: '', ID: '', QTY: '', Status: '' }) }
+  ngOnInit()
+  { 
     this.productFacade.loadProducts();
   }
-  addProduct(product: Product): void {
-    this.productFacade.addProduct(product);
+  addProduct() {
+    this.product = this.myForm.value
+    this.productFacade.addProduct(this.product);
+    this.router.navigate(['/product-management']);
   }
 
-  // updateProduct(product: Product): void {
-  //   this.productFacade.updateProduct(product);
-  // }
-
-  saveProduct() {
-    const product: Product = {
-      ProductName: this.productName,
-      ProductDescription: this.productDescription,
-      QTY: this.quantity,
-      Status: this.status,
-      ID: this.editMode ? this.productId! : Math.floor(Math.random() * 1000000)
-    };
-    if (this.editMode) {
-      this.productFacade.updateProduct(product);
-    } else {
-      this.productFacade.addProduct(product);
-    }
-    this.clearForm();
-  }
-
-  editProduct(product: Product) {
-    this.productName = product.ProductName;
-    this.productDescription = product.ProductDescription;
-    this.quantity = product.QTY;
-    this.status = product.Status;
-    this.editMode = true;
-    this.productId = product.ID;
-  }
-
-  deleteProduct(id: number) {
-    this.productFacade.deleteProduct(id);
-  }
-
-  clearForm() {
-    this.productName = '';
-    this.productDescription = '';
-    this.quantity = 0;
-    this.status = 'In Stock';
-    this.editMode = false;
-    this.productId = null;
-  }
+  deleteProduct(id:number){
+    this.productFacade.removeProduct(id);
+}
+updateProduct(id:number){
+  this.productFacade.getProductForUpdate(id)
+  this.router.navigate(['/product-management/products/productEdit'])
+}
 }

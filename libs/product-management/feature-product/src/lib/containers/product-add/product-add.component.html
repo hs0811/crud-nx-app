@@ -1,0 +1,28 @@
+<div class="container">
+    <div style="width: 50%;">
+        <form [formGroup]="myForm" (ngSubmit)="addProduct()">
+            <div class="form-group">
+                <label  for="ProductName">Product Name</label>
+                <input class="textbox-27" type="text" class="form-control" id="ProductName"
+                    placeholder="Enter ProductName" formControlName="ProductName" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="ProductDescription">Product Description</label>
+                <input class="textbox-27" type="text" class="form-control" id="ProductDescription"
+                    placeholder="Enter ProductDescription" formControlName="ProductDescription" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="QTY">QTY</label>
+                <input class="textbox-27"  type="number" class="form-control" id="QTY"
+                    placeholder="Enter QTY" formControlName="QTY">
+            </div>
+            <div class="form-group">
+                <label for="Status">Status</label>
+                <input class="textbox-27" type="text" Status="form-control" id="Status"
+                    placeholder="Enter Status" formControlName="Status" autocomplete="off">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

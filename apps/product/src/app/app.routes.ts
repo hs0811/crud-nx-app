@@ -9,7 +9,7 @@ export const appRoutes: Route[] = [
   },
   {
     path:'product-management',
-    loadChildren: () => import('../../../../libs/product-management/feature-product/src/lib/product-management-product-features.module').then((m) => m.ProductManagementProductFeaturesModule)
+    loadChildren: () => import('@crud-nx-app/product-management/feature-home').then((m) => m.ProductManagementFeatureHomeModuleTs)
   },
 
 ];

@@ -19,6 +19,9 @@
       "@crud-nx-app/product-management/domian": [
         "libs/product-management/domian/src/index.ts"
       ],
+      "@crud-nx-app/product-management/feature-home": [
+        "libs/product-management/feature-home/src/index.ts"
+      ],
       "@crud-nx-app/product-management/feature-product": [
         "libs/product-management/feature-product/src/index.ts"
       ],

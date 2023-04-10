@@ -35,22 +35,63 @@ export class ProductDataService {
     return of(this.products);
   }
 
-  addProduct(product: Product): Observable<Product[]> {
+  // addProduct(product: Product): Observable<Product[]> {
+  //   this.products.push(product);
+  //   return of(this.products);
+  // }
+
+
+  // updateProduct(product: Product): Observable<Product[]> {
+  //   const index = this.products.findIndex(p => p.ID === product.ID);
+  //   if (index !== -1) {
+  //     this.products[index] = product;
+  //   }
+  //   return of(this.products);
+  // }
+
+  // deleteProduct(id: number): Observable<Product[]> {
+  //   this.products = this.products.filter(p => p.ID !== id);
+  //   return of(this.products);
+  // }
+
+  //===========================================================================
+  addNewProduct(product: Product)
+  {
+    const lastId = this.products.length;
+    product.ID = lastId+1;
     this.products.push(product);
-    return of(this.products);
   }
 
-  updateProduct(product: Product): Observable<Product[]> {
-    const index = this.products.findIndex(p => p.ID === product.ID);
+  removeProduct(id: number){
+    const index = this.products.findIndex(val => val.ID == id);
     if (index !== -1) {
-      this.products[index] = product;
+      this.products.splice(index,1);
     }
-    return of(this.products);
   }
 
-  deleteProduct(id: number): Observable<Product[]> {
-    this.products = this.products.filter(p => p.ID !== id);
-    return of(this.products);
+  getProductForUpdate(id: number): Observable<Product>{
+   
+      const data = this.products.find(val => val.ID == id)
+      if(data)
+      return of(data);
+      else
+      return of();
+    
+  }
+
+  updateProduct(product?: Product)
+  {
+    if (product)
+    {
+      const data = this.products.find((val)=> val.ID == product.ID);
+      if(data)
+      {
+        data.ProductName = product.ProductName
+        data.ProductDescription = product.ProductDescription
+        data.QTY = product.QTY
+        data.Status = product.Status
+      }
+    }
   }
 }
 
